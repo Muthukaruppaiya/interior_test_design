@@ -46,9 +46,9 @@ export default function App() {
       e.preventDefault();
 
       const now = performance.now();
-      if (isLocked || now - lastWheelTime < 1100) return;
+      if (isLocked || now - lastWheelTime < 850) return;
 
-      if (Math.abs(e.deltaY) > 16) {
+      if (Math.abs(e.deltaY) > 4) {
         lastWheelTime = now;
         isLocked = true;
 
@@ -60,7 +60,7 @@ export default function App() {
 
         setTimeout(() => {
           isLocked = false;
-        }, 1100);
+        }, 850);
       }
     };
 
@@ -76,7 +76,7 @@ export default function App() {
         setActiveSlide((prev) => Math.min(SECTION_TARGETS.length - 1, prev + 1));
         setTimeout(() => {
           isLocked = false;
-        }, 1100);
+        }, 850);
       } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
         e.preventDefault();
         if (isLocked) return;
@@ -84,7 +84,7 @@ export default function App() {
         setActiveSlide((prev) => Math.max(0, prev - 1));
         setTimeout(() => {
           isLocked = false;
-        }, 1100);
+        }, 850);
       }
     };
 
@@ -123,8 +123,8 @@ export default function App() {
       const diffY = touchStartY - touchEndY;
       const diffX = touchStartX - touchEndX;
 
-      // Only respond to vertical swipes, ignore horizontal taps or swipes
-      if (Math.abs(diffY) > 30 && Math.abs(diffY) > Math.abs(diffX) * 1.1) {
+      // Soft vertical swipe trigger (responds softly to 12px finger movement)
+      if (Math.abs(diffY) > 12 && Math.abs(diffY) > Math.abs(diffX) * 0.7) {
         isLocked = true;
         if (diffY > 0) {
           setActiveSlide((prev) => Math.min(SECTION_TARGETS.length - 1, prev + 1));
@@ -133,7 +133,7 @@ export default function App() {
         }
         setTimeout(() => {
           isLocked = false;
-        }, 1100);
+        }, 850);
       }
     };
 
@@ -252,7 +252,7 @@ export default function App() {
                 zIndex,
                 pointerEvents: isCurrent ? 'auto' : 'none',
                 transition:
-                  'transform 1.05s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1)',
+                  'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1)',
                 willChange: 'transform, opacity',
                 transformOrigin: 'center center',
                 WebkitBackfaceVisibility: 'hidden',

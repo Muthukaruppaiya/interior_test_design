@@ -33,12 +33,13 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
         borderRadius: '999px',
         zIndex: 9000,
         boxSizing: 'border-box',
-        // Stable header: pure, bright, luxury pearl glass
-        backgroundColor: 'rgba(255, 255, 255, 0.88)',
-        backdropFilter: 'blur(24px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(24px) saturate(160%)',
-        border: '1px solid rgba(255, 255, 255, 0.95)',
-        boxShadow: '0 10px 30px rgba(60, 45, 20, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1)',
+        // Ultra-luxurious liquid frosted glass
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.28) 100%)',
+        backdropFilter: 'blur(28px) saturate(190%) contrast(105%)',
+        WebkitBackdropFilter: 'blur(28px) saturate(190%) contrast(105%)',
+        border: '1px solid rgba(255, 255, 255, 0.82)',
+        boxShadow:
+          '0 18px 45px rgba(27, 25, 22, 0.08), inset 0 1px 1.5px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(169, 136, 82, 0.15)',
       }}
       className="site-navbar-stable"
     >
@@ -214,8 +215,11 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
             style={{
               padding: '0 16px',
               borderRadius: '999px',
-              background: 'rgba(255, 255, 255, 0.85)',
-              border: '1px solid rgba(169, 136, 82, 0.3)',
+              background: 'rgba(255, 255, 255, 0.45)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.75)',
+              boxShadow: '0 4px 12px rgba(27, 25, 22, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
@@ -224,8 +228,8 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
               transition: 'all 0.2s ease',
             }}
             className="navbar-menu-btn"
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(169, 136, 82, 0.12)')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.85)')}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.45)')}
           >
             <span
               style={{
