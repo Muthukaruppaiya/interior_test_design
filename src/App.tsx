@@ -29,6 +29,7 @@ export default function App() {
     let isLocked = false;
     let lastWheelTime = 0;
     let touchStartY = 0;
+    let touchStartX = 0;
 
     // Wheel Event Listener
     const handleWheel = (e: WheelEvent) => {
@@ -45,9 +46,9 @@ export default function App() {
       e.preventDefault();
 
       const now = performance.now();
-      if (isLocked || now - lastWheelTime < 1250) return;
+      if (isLocked || now - lastWheelTime < 1100) return;
 
-      if (Math.abs(e.deltaY) > 18) {
+      if (Math.abs(e.deltaY) > 16) {
         lastWheelTime = now;
         isLocked = true;
 
@@ -59,7 +60,7 @@ export default function App() {
 
         setTimeout(() => {
           isLocked = false;
-        }, 1250);
+        }, 1100);
       }
     };
 
@@ -75,7 +76,7 @@ export default function App() {
         setActiveSlide((prev) => Math.min(SECTION_TARGETS.length - 1, prev + 1));
         setTimeout(() => {
           isLocked = false;
-        }, 1250);
+        }, 1100);
       } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
         e.preventDefault();
         if (isLocked) return;
@@ -83,7 +84,7 @@ export default function App() {
         setActiveSlide((prev) => Math.max(0, prev - 1));
         setTimeout(() => {
           isLocked = false;
-        }, 1250);
+        }, 1100);
       }
     };
 
@@ -92,6 +93,24 @@ export default function App() {
       const target = e.target as HTMLElement | null;
       if (target?.closest('.concierge-window') || target?.closest('[role="dialog"]')) return;
       touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    };
+
+    // Intercept touchmove to eliminate mobile browser pull-to-refresh
+    const handleTouchMove = (e: TouchEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target?.closest('.concierge-window') ||
+        target?.closest('[role="dialog"]') ||
+        target?.closest('input') ||
+        target?.closest('textarea') ||
+        target?.closest('#contact')
+      ) {
+        return;
+      }
+      if (e.cancelable) {
+        e.preventDefault();
+      }
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
@@ -100,18 +119,21 @@ export default function App() {
       if (isLocked) return;
 
       const touchEndY = e.changedTouches[0].clientY;
-      const diff = touchStartY - touchEndY;
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffY = touchStartY - touchEndY;
+      const diffX = touchStartX - touchEndX;
 
-      if (Math.abs(diff) > 35) {
+      // Only respond to vertical swipes, ignore horizontal taps or swipes
+      if (Math.abs(diffY) > 30 && Math.abs(diffY) > Math.abs(diffX) * 1.1) {
         isLocked = true;
-        if (diff > 0) {
+        if (diffY > 0) {
           setActiveSlide((prev) => Math.min(SECTION_TARGETS.length - 1, prev + 1));
         } else {
           setActiveSlide((prev) => Math.max(0, prev - 1));
         }
         setTimeout(() => {
           isLocked = false;
-        }, 1250);
+        }, 1100);
       }
     };
 
@@ -128,6 +150,7 @@ export default function App() {
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
     window.addEventListener('siriz-navigate-slide', handleNavigate);
 
@@ -135,6 +158,7 @@ export default function App() {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('siriz-navigate-slide', handleNavigate);
     };
@@ -228,9 +252,11 @@ export default function App() {
                 zIndex,
                 pointerEvents: isCurrent ? 'auto' : 'none',
                 transition:
-                  'transform 1.25s cubic-bezier(0.65, 0.05, 0.36, 1), opacity 1.25s cubic-bezier(0.65, 0.05, 0.36, 1)',
+                  'transform 1.05s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1)',
                 willChange: 'transform, opacity',
                 transformOrigin: 'center center',
+                WebkitBackfaceVisibility: 'hidden',
+                backfaceVisibility: 'hidden',
                 boxShadow: isFuture ? '0 -25px 60px rgba(27, 25, 22, 0.08)' : 'none',
               }}
             >
