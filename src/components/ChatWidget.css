@@ -90,7 +90,7 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── 2. Chat Main Window (Compact, Shorter Luxury Frosted Glass) ── */
+/* ── 2. Chat Main Window (Compact, Ultra-Refined Frosted Glass) ── */
 .concierge-window {
   position: fixed;
   bottom: 24px;
@@ -98,17 +98,29 @@
   width: 380px;
   height: 520px;
   max-height: calc(82vh - 24px);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.72);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(32px) saturate(170%);
   -webkit-backdrop-filter: blur(32px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 24px 70px rgba(60, 45, 20, 0.16), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border: 1px solid rgba(169, 136, 82, 0.22);
+  box-shadow: 0 24px 60px rgba(60, 45, 20, 0.16), inset 0 1px 0 rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   z-index: 99995;
   transform-origin: bottom right;
+}
+
+.concierge-window *::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.concierge-window *::-webkit-scrollbar-thumb {
+  background: rgba(169, 136, 82, 0.28);
+  border-radius: 999px;
+}
+.concierge-window *::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Internal Radial Glow Accent */
@@ -126,29 +138,31 @@
 
 /* ── 3. Bubbles & Typography ── */
 .bubble-bot {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  border-radius: 20px 20px 20px 4px;
-  padding: 13px 18px;
+  border: 1px solid rgba(169, 136, 82, 0.18);
+  border-radius: 18px 18px 18px 4px;
+  padding: 12px 16px;
   color: #1B1916;
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  box-shadow: 0 6px 20px rgba(60, 45, 20, 0.04);
-  max-width: 86%;
+  font-size: 13.5px;
+  line-height: 1.55;
+  white-space: pre-line;
+  box-shadow: 0 3px 12px rgba(60, 45, 20, 0.05);
+  max-width: 88%;
 }
 
 .bubble-user {
   background: linear-gradient(135deg, #A98852 0%, #94713E 100%);
   color: #FFFFFF;
-  border-radius: 20px 20px 4px 20px;
-  padding: 12px 18px;
+  border-radius: 18px 18px 4px 18px;
+  padding: 10px 16px;
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  box-shadow: 0 6px 20px rgba(169, 136, 82, 0.25);
+  font-size: 13.5px;
+  line-height: 1.45;
+  white-space: pre-line;
+  box-shadow: 0 4px 16px rgba(169, 136, 82, 0.22);
   max-width: 82%;
   margin-left: auto;
 }

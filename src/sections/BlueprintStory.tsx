@@ -23,18 +23,51 @@ export default function BlueprintStory() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '0 clamp(24px, 5vw, 64px)',
+        padding: '0 clamp(20px, 4vw, 56px)',
         overflow: 'hidden',
         boxSizing: 'border-box',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth) ── */}
       <div
         style={{
-          maxWidth: '1280px',
-          width: '100%',
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.17,
+          filter: 'blur(16px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
         }}
       >
-        <div className="small-label" style={{ marginBottom: 'clamp(20px, 3vh, 36px)', color: '#A98852' }}>
+        <img
+          src={media.process[1]?.image || media.selectedWork[1].image}
+          alt="Architectural workspace"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.78) 0%, rgba(248, 245, 239, 0.48) 50%, rgba(248, 245, 239, 0.88) 100%)',
+          }}
+        />
+      </div>
+
+      <div
+        className="liquid-glass"
+        style={{
+          maxWidth: '1240px',
+          width: '100%',
+          padding: 'clamp(28px, 4.5vh, 52px) clamp(24px, 4vw, 54px)',
+          borderRadius: '32px',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 24px 60px rgba(27, 25, 22, 0.07), inset 0 1px 1px rgba(255, 255, 255, 1)',
+          position: 'relative',
+          zIndex: 2,
+        }}
+      >
+        <div className="small-label" style={{ marginBottom: 'clamp(16px, 2.5vh, 28px)', color: '#A98852' }}>
           Methodology
         </div>
 

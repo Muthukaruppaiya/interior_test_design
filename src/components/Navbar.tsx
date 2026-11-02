@@ -33,13 +33,13 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
         borderRadius: '999px',
         zIndex: 9000,
         boxSizing: 'border-box',
-        // Ultra-luxurious liquid frosted glass
-        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.28) 100%)',
-        backdropFilter: 'blur(28px) saturate(190%) contrast(105%)',
-        WebkitBackdropFilter: 'blur(28px) saturate(190%) contrast(105%)',
-        border: '1px solid rgba(255, 255, 255, 0.82)',
+        // Ultra-luxurious liquid frosted glass capsule
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.42) 100%)',
+        backdropFilter: 'blur(32px) saturate(190%) contrast(105%)',
+        WebkitBackdropFilter: 'blur(32px) saturate(190%) contrast(105%)',
+        border: '1px solid rgba(255, 255, 255, 0.95)',
         boxShadow:
-          '0 18px 45px rgba(27, 25, 22, 0.08), inset 0 1px 1.5px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(169, 136, 82, 0.15)',
+          '0 16px 42px rgba(27, 25, 22, 0.08), inset 0 1px 1.5px rgba(255, 255, 255, 1), inset 0 -1px 1px rgba(169, 136, 82, 0.12)',
       }}
       className="site-navbar-stable"
     >
@@ -54,7 +54,7 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
         }}
         className="navbar-inner-nav"
       >
-        {/* Left: Stable Brand Wordmark */}
+        {/* Left: Official Brand Logo */}
         <a
           href="#hero"
           onClick={(e) => {
@@ -63,39 +63,23 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
           }}
           style={{
             display: 'flex',
-            alignItems: 'baseline',
-            gap: '8px',
+            alignItems: 'center',
             textDecoration: 'none',
-            color: '#1B1916',
             userSelect: 'none',
+            height: '100%',
           }}
         >
-          <span
+          <img
+            src="/logo.png"
+            alt="Siriz Interiors"
             style={{
-              fontFamily: '"Cormorant Garamond", Georgia, serif',
-              fontWeight: 400,
-              letterSpacing: '0.24em',
-              textTransform: 'uppercase',
-              color: '#1B1916',
+              height: 'clamp(26px, 3.8vh, 34px)',
+              width: 'auto',
+              objectFit: 'contain',
+              display: 'block',
+              filter: 'drop-shadow(0 2px 6px rgba(169, 136, 82, 0.12))',
             }}
-            className="navbar-logo-text"
-          >
-            SIRIZ
-          </span>
-          <span
-            style={{
-              fontFamily: '"Manrope", sans-serif',
-              fontSize: '9px',
-              fontWeight: 600,
-              letterSpacing: '0.26em',
-              color: '#A98852',
-              textTransform: 'uppercase',
-              display: 'none',
-            }}
-            className="navbar-city-tag"
-          >
-            CHENNAI
-          </span>
+          />
         </a>
 
         {/* Center: Desktop Navigation Links */}
@@ -207,36 +191,39 @@ export default function Navbar({ onOpenMenu, activeSlide = 0 }: NavbarProps) {
             </span>
           </button>
 
-          {/* Minimal Menu Trigger (Refined, perfectly sized for both mobile & desktop) */}
+          {/* Minimal Menu Trigger (Refined rounded capsule pill matching reference) */}
           <button
             type="button"
             onClick={onOpenMenu}
             aria-label="Open Navigation Menu"
             style={{
-              padding: '0 16px',
+              padding: '0 clamp(16px, 2vw, 22px)',
               borderRadius: '999px',
-              background: 'rgba(255, 255, 255, 0.45)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.75)',
-              boxShadow: '0 4px 12px rgba(27, 25, 22, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
+              background: '#FFFFFF',
+              border: '1px solid rgba(255, 255, 255, 0.95)',
+              boxShadow: '0 2px 10px rgba(27, 25, 22, 0.06)',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '6px',
-              transition: 'all 0.2s ease',
+              transition: 'all 0.25s ease',
             }}
             className="navbar-menu-btn"
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.7)')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.45)')}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#FAF8F5';
+              e.currentTarget.style.transform = 'scale(1.03)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#FFFFFF';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
           >
             <span
               style={{
                 fontFamily: '"Manrope", sans-serif',
                 fontSize: '11px',
-                fontWeight: 600,
-                letterSpacing: '0.18em',
+                fontWeight: 700,
+                letterSpacing: '0.2em',
                 textTransform: 'uppercase',
                 color: '#1B1916',
               }}

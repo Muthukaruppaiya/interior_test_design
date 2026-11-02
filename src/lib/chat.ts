@@ -114,15 +114,15 @@ export async function* streamReply(
   // 1. Check for Quiz triggers
   if (inputLower.includes('style') || inputLower.includes('quiz') || inputLower.includes('find my style')) {
     const promptText = lang === 'ta'
-      ? 'சிறந்த இல்ல வடிவமைப்பிற்கு உங்கள் விருப்பமான அழகியல் பாணியை தேர்ந்தெடுங்கள்:'
-      : 'Let us discover the aesthetic soul of your home. Select the architectural dialect that speaks to you:';
+      ? 'விருப்பமான அழகியல் பாணியை தேர்வு செய்யவும்:'
+      : 'Choose your preferred design style:';
 
     const words = promptText.split(' ');
     let currentText = '';
     for (const word of words) {
       currentText += (currentText ? ' ' : '') + word;
       yield { textChunk: currentText, isComplete: false };
-      await new Promise((r) => setTimeout(r, 25));
+      await new Promise((r) => setTimeout(r, 12));
     }
 
     yield {
@@ -133,10 +133,10 @@ export async function* streamReply(
         richType: 'quiz_style',
         richData: {
           styles: [
-            { id: 'modern_luxury', name: 'Modern Luxury', image: media.projects[0].coverImage, desc: 'Travertine marble, warm brushed brass, fluted oak joinery' },
-            { id: 'contemporary', name: 'Contemporary Architectural', image: media.projects[1].coverImage, desc: 'Understated neutral palettes, acoustic panelling, concealed doors' },
-            { id: 'traditional_fusion', name: 'Traditional South Indian', image: media.projects[4].coverImage, desc: 'Teakwood jaali, Makrana white marble sanctum, brass bell chimes' },
-            { id: 'minimal_scandi', name: 'Minimal Scandinavian', image: media.projects[2].coverImage, desc: 'Light warm oak, soft lime-wash plaster, diffused daylight' },
+            { id: 'modern_luxury', name: 'Modern Luxury', image: media.projects[0].coverImage, desc: 'Marble, brass, fluted oak joinery' },
+            { id: 'contemporary', name: 'Contemporary', image: media.projects[1].coverImage, desc: 'Clean lines, neutral tones, acoustic slats' },
+            { id: 'traditional_fusion', name: 'Traditional Fusion', image: media.projects[4].coverImage, desc: 'Teakwood jaali, marble altar, brass accents' },
+            { id: 'minimal_scandi', name: 'Minimal Scandinavian', image: media.projects[2].coverImage, desc: 'Light oak, curved plaster, airy daylight' },
           ],
         },
       },
@@ -147,15 +147,15 @@ export async function* streamReply(
   // 2. Check for Estimate / Pricing Calculator triggers
   if (inputLower.includes('estimate') || inputLower.includes('calculate') || inputLower.includes('calculator') || inputLower.includes('cost helper')) {
     const introText = lang === 'ta'
-      ? 'எங்கள் உடனடி மதிப்பீட்டாளர் மூலம் உங்கள் வீட்டிற்கான உத்தேச முதலீட்டை கணக்கிடுங்கள்:'
-      : 'Here is our interactive estimate helper. Select your rooms and carpet area for an instant indicative range:';
+      ? 'உடனடி மதிப்பீட்டிற்கு அறைகள் மற்றும் பரப்பளவை தேர்வு செய்யவும்:'
+      : 'Select rooms and carpet area for an instant estimate:';
 
     const words = introText.split(' ');
     let currentText = '';
     for (const word of words) {
       currentText += (currentText ? ' ' : '') + word;
       yield { textChunk: currentText, isComplete: false };
-      await new Promise((r) => setTimeout(r, 25));
+      await new Promise((r) => setTimeout(r, 12));
     }
 
     yield {
@@ -175,15 +175,15 @@ export async function* streamReply(
   // 3. Check for Project Showcase / Portfolio trigger
   if (inputLower.includes('project') || inputLower.includes('portfolio') || inputLower.includes('works') || inputLower.includes('photos')) {
     const projText = lang === 'ta'
-      ? 'எங்கள் அண்மைய தனித்துவமான வீட்டு திட்டங்களை இங்கே காணலாம்:'
-      : 'Here are three of our recent signature architectural commissions in Chennai:';
+      ? 'சென்னையில் நாங்கள் முடித்த சில முக்கிய திட்டங்கள்:'
+      : 'Recent turnkey residences completed across Chennai:';
 
     const words = projText.split(' ');
     let currentText = '';
     for (const word of words) {
       currentText += (currentText ? ' ' : '') + word;
       yield { textChunk: currentText, isComplete: false };
-      await new Promise((r) => setTimeout(r, 25));
+      await new Promise((r) => setTimeout(r, 12));
     }
 
     yield {
@@ -195,7 +195,7 @@ export async function* streamReply(
         richData: {
           projects: media.projects.slice(0, 3),
         },
-        followUps: ['Request project brochure', 'Calculate estimate', 'Book site visit'],
+        followUps: ['Pricing & Packages', 'Book Site Visit'],
       },
     };
     return;
@@ -204,15 +204,15 @@ export async function* streamReply(
   // 4. Check for Consultation booking / Slot picker trigger
   if (inputLower.includes('consult') || inputLower.includes('appointment') || inputLower.includes('meet') || inputLower.includes('slot') || inputLower.includes('schedule')) {
     const slotText = lang === 'ta'
-      ? 'எங்கள் தலைமை வடிவமைப்பாளருடன் இலவச ஆலோசனை பெற வசதியான நேரத்தை தேர்வு செய்யவும்:'
-      : 'Select a preferred day and time for your complimentary private architectural consultation:';
+      ? 'இலவச ஆலோசனைக்கான நேரத்தை தேர்வு செய்யவும்:'
+      : 'Choose a convenient time for your free consultation:';
 
     const words = slotText.split(' ');
     let currentText = '';
     for (const word of words) {
       currentText += (currentText ? ' ' : '') + word;
       yield { textChunk: currentText, isComplete: false };
-      await new Promise((r) => setTimeout(r, 25));
+      await new Promise((r) => setTimeout(r, 12));
     }
 
     yield {
@@ -225,7 +225,7 @@ export async function* streamReply(
           studioPhone: '+918438423938',
           whatsapp: '+919384577177',
         },
-        followUps: ['Morning slot (10 AM - 1 PM)', 'Evening slot (4 PM - 7 PM)', 'WhatsApp directly'],
+        followUps: ['Tomorrow Morning', 'This Weekend', 'WhatsApp Designer'],
       },
     };
     return;
@@ -242,7 +242,7 @@ export async function* streamReply(
     for (const word of words) {
       currentText += (currentText ? ' ' : '') + word;
       yield { textChunk: currentText, isComplete: false };
-      await new Promise((r) => setTimeout(r, 25));
+      await new Promise((r) => setTimeout(r, 12));
     }
 
     yield {
@@ -251,17 +251,17 @@ export async function* streamReply(
       fullMessage: {
         text: currentText,
         richType: (matchResult.entry.richType as ChatMessage['richType']) || 'text',
-        followUps: matchResult.suggestions,
+        followUps: matchResult.suggestions.slice(0, 3),
         richData: matchResult.entry.richType === 'contact'
           ? { phone: '+91 84384 23938', whatsapp: '+91 93845 77177', address: 'Medavakkam, Chennai' }
           : undefined,
       },
     };
   } else {
-    // Smart Fallback suggesting 3 closest topics
+    // Smart Fallback suggesting closest topics
     const fallbackText = lang === 'ta'
-      ? 'மன்னிக்கவும், இதற்கு நேரடி விடை என்னிடம் இல்லை. எங்கள் தலைமை வடிவமைப்பாளர் தனிப்பட்ட முறையில் உதவ முடியும். நீங்கள் தெரிந்து கொள்ள விரும்பும் தலைப்பை தேர்ந்தெடுக்கவும்:'
-      : "I don't have an exact match for that inquiry, but our senior design architects can assist you personally. Would one of these topics help?";
+      ? 'மன்னிக்கவும், இதற்கு நேரடி பதில் இல்லை. கீழே உள்ள தலைப்பை தேர்ந்தெடுக்கவும் அல்லது வாட்ஸ்அப்பில் பேசலாம்:'
+      : "I didn't quite catch that. Would one of these topics help, or feel free to chat with our designer directly:";
 
     const words = fallbackText.split(' ');
     let currentText = '';
@@ -269,7 +269,7 @@ export async function* streamReply(
     for (const word of words) {
       currentText += (currentText ? ' ' : '') + word;
       yield { textChunk: currentText, isComplete: false };
-      await new Promise((r) => setTimeout(r, 25));
+      await new Promise((r) => setTimeout(r, 12));
     }
 
     yield {
@@ -278,7 +278,7 @@ export async function* streamReply(
       fullMessage: {
         text: currentText,
         richType: 'text',
-        followUps: matchResult.suggestions,
+        followUps: matchResult.suggestions.slice(0, 3),
       },
     };
   }
@@ -289,22 +289,15 @@ export async function* streamReply(
  */
 export function getInitialGreeting(lang: Language = 'en', userName?: string): ChatMessage {
   const greeting = lang === 'ta'
-    ? `வணக்கம்${userName ? ` ${userName}` : ''}! நான் சிரிஸ் வடிவமைப்பு உதவியாளர். உங்கள் வீட்டிற்கான யோசனைகள், பொருட்கள் அல்லது 45 நாள் ஒப்படைப்பு பற்றி எதையும் கேட்கலாம்.`
-    : `Welcome${userName ? ` back, ${userName}` : ''}. I am the Siriz Design Concierge. How can I assist your home's architectural journey today?`;
+    ? `வணக்கம்${userName ? ` ${userName}` : ''}! நான் சிரிஸ் உதவியாளர். உங்கள் வீட்டிற்கான இன்டீரியர் கேள்விகளுக்கு உதவ தயாராக உள்ளேன்.`
+    : `Hi${userName ? ` ${userName}` : ''}! Welcome to Siriz Interiors. How can we help you today?`;
 
   return {
     id: `msg-welcome-${Date.now()}`,
     sender: 'bot',
     text: greeting,
     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    language: lang,
-    followUps: [
-      lang === 'ta' ? 'வடிவமைப்பு தேர்வு (Quiz)' : 'Find My Style Quiz',
-      lang === 'ta' ? 'விலை & தொகுப்புகள்' : 'Pricing & Packages',
-      lang === 'ta' ? '45 நாள் ஒப்படைப்பு' : '45-Day Handover & Warranty',
-      lang === 'ta' ? 'BWP மரைன் பிளைவுட்' : 'Materials & BWP Ply',
-      lang === 'ta' ? 'இலவச ஆலோசனை' : 'Book Free Consultation',
-    ],
+    followUps: [],
   };
 }
 

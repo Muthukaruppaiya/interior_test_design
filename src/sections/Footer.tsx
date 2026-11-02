@@ -79,11 +79,36 @@ export default function Footer() {
         justifyContent: 'space-between',
         padding: 'clamp(24px, 4vh, 48px) clamp(20px, 4vw, 48px) 16px',
         overflowY: 'auto',
-        borderTop: '1px solid rgba(169, 136, 82, 0.2)',
         boxSizing: 'border-box',
         scrollbarWidth: 'none',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.16,
+          filter: 'blur(16px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
+        }}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=80"
+          alt="Architectural space backdrop"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.78) 0%, rgba(248, 245, 239, 0.45) 50%, rgba(248, 245, 239, 0.88) 100%)',
+          }}
+        />
+      </div>
+
       <div
         style={{
           maxWidth: '1280px',
@@ -451,31 +476,30 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── 3. Giant Outlined SIRIZ Wordmark (Parallax Curtain Reveal) ── */}
+        {/* ── 3. Official Logo Display (Parallax Curtain Reveal) ── */}
         <div
           ref={wordmarkRef}
           style={{
             textAlign: 'center',
             userSelect: 'none',
             overflow: 'hidden',
-            paddingTop: '20px',
+            padding: '24px 0 10px',
+            display: 'flex',
+            justifyContent: 'center',
             willChange: 'transform',
           }}
         >
-          <div
+          <img
+            src="/logo.png"
+            alt="Siriz Interiors"
             style={{
-              fontFamily: '"Cormorant Garamond", Georgia, serif',
-              fontSize: 'clamp(54px, 12vw, 150px)',
-              fontWeight: 300,
-              lineHeight: 0.9,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: 'transparent',
-              WebkitTextStroke: '1px rgba(169, 136, 82, 0.32)',
+              height: 'clamp(52px, 8.5vh, 76px)',
+              width: 'auto',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 4px 18px rgba(169, 136, 82, 0.22))',
+              opacity: 0.9,
             }}
-          >
-            SIRIZ
-          </div>
+          />
         </div>
 
         {/* Copyright */}

@@ -77,7 +77,7 @@ export default function IntroStatement() {
         height: '100vh',
         minHeight: '100vh',
         backgroundColor: '#F8F5EF',
-        padding: '0 clamp(24px, 5vw, 64px)',
+        padding: '0 clamp(20px, 4vw, 48px)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -86,6 +86,32 @@ export default function IntroStatement() {
         boxSizing: 'border-box',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.18,
+          filter: 'blur(14px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
+        }}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2200&q=80"
+          alt="Architectural space backdrop"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.75) 0%, rgba(248, 245, 239, 0.45) 50%, rgba(248, 245, 239, 0.85) 100%)',
+          }}
+        />
+      </div>
+
       {/* Floating Accent Image 1 (Left) */}
       <div
         ref={floatImg1Ref}
@@ -95,9 +121,10 @@ export default function IntroStatement() {
           top: '25%',
           width: 'clamp(120px, 16vw, 220px)',
           aspectRatio: '4 / 5',
-          borderRadius: '16px',
+          borderRadius: '20px',
           overflow: 'hidden',
-          boxShadow: '0 20px 50px rgba(60, 45, 20, 0.08)',
+          boxShadow: '0 20px 50px rgba(60, 45, 20, 0.12)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
           display: 'none',
           zIndex: 1,
         }}
@@ -120,9 +147,10 @@ export default function IntroStatement() {
           bottom: '20%',
           width: 'clamp(140px, 18vw, 240px)',
           aspectRatio: '4 / 5',
-          borderRadius: '16px',
+          borderRadius: '20px',
           overflow: 'hidden',
-          boxShadow: '0 20px 50px rgba(60, 45, 20, 0.08)',
+          boxShadow: '0 20px 50px rgba(60, 45, 20, 0.12)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
           display: 'none',
           zIndex: 1,
         }}
@@ -136,16 +164,22 @@ export default function IntroStatement() {
         />
       </div>
 
-      {/* Central Editorial Container */}
+      {/* ── Central Frosted Liquid-Glass Editorial Card ── */}
       <div
+        className="liquid-glass"
         style={{
-          maxWidth: '1080px',
+          maxWidth: '1020px',
+          width: '100%',
+          padding: 'clamp(44px, 6vh, 76px) clamp(24px, 5vw, 64px)',
+          borderRadius: '32px',
           textAlign: 'center',
           position: 'relative',
           zIndex: 2,
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 24px 60px rgba(27, 25, 22, 0.07), inset 0 1px 1px rgba(255, 255, 255, 1)',
         }}
       >
-        <div className="small-label" style={{ marginBottom: '28px', color: '#A98852' }}>
+        <div className="small-label" style={{ marginBottom: '24px', color: '#A98852' }}>
           Philosophy
         </div>
 
@@ -153,12 +187,12 @@ export default function IntroStatement() {
           ref={sentenceRef}
           style={{
             fontFamily: '"Cormorant Garamond", Georgia, serif',
-            fontSize: 'clamp(40px, 6.2vw, 96px)',
+            fontSize: 'clamp(38px, 5.8vw, 90px)',
             fontWeight: 300,
             lineHeight: 1.08,
             letterSpacing: '-0.02em',
             color: '#1B1916',
-            margin: '0 0 40px 0',
+            margin: '0 0 36px 0',
             textWrap: 'balance',
           }}
         >
@@ -188,7 +222,7 @@ export default function IntroStatement() {
           style={{
             fontFamily: '"Manrope", sans-serif',
             fontSize: '12px',
-            fontWeight: 500,
+            fontWeight: 600,
             letterSpacing: '0.24em',
             textTransform: 'uppercase',
             color: '#8C8272',

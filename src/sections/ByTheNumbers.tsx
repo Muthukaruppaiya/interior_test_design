@@ -49,18 +49,55 @@ export default function ByTheNumbers({ isActive = false }: ByTheNumbersProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '0 clamp(24px, 5vw, 64px)',
-        borderTop: '1px solid rgba(169, 136, 82, 0.15)',
-        borderBottom: '1px solid rgba(169, 136, 82, 0.15)',
+        padding: '0 clamp(20px, 4vw, 56px)',
+        overflow: 'hidden',
         boxSizing: 'border-box',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth) ── */}
       <div
         style={{
-          maxWidth: '1440px',
-          margin: '0 auto',
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.17,
+          filter: 'blur(16px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
         }}
       >
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=80"
+          alt="Architectural atelier backdrop"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.78) 0%, rgba(248, 245, 239, 0.45) 50%, rgba(248, 245, 239, 0.88) 100%)',
+          }}
+        />
+      </div>
+
+      <div
+        className="liquid-glass"
+        style={{
+          maxWidth: '1240px',
+          width: '100%',
+          margin: '0 auto',
+          borderRadius: '32px',
+          padding: 'clamp(28px, 4.5vh, 48px) clamp(20px, 3.5vw, 44px)',
+          border: '1px solid rgba(255, 255, 255, 0.9)',
+          boxShadow: '0 24px 60px rgba(27, 25, 22, 0.07), inset 0 1px 1px rgba(255, 255, 255, 1)',
+          position: 'relative',
+          zIndex: 2,
+        }}
+      >
+        <div className="small-label" style={{ textAlign: 'center', marginBottom: '24px', color: '#A98852' }}>
+          Atelier Metrics
+        </div>
+
         <div
           style={{
             display: 'grid',

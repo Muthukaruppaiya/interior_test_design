@@ -44,6 +44,32 @@ export default function SignatureProjects() {
         boxSizing: 'border-box',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth for Navbar & Cards) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.16,
+          filter: 'blur(16px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
+        }}
+      >
+        <img
+          src={media.selectedWork[0].image}
+          alt="Architectural space backdrop"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.78) 0%, rgba(248, 245, 239, 0.5) 50%, rgba(248, 245, 239, 0.88) 100%)',
+          }}
+        />
+      </div>
+
       {/* ── Section Header & Navigation Controls ── */}
       <div
         style={{
@@ -52,6 +78,8 @@ export default function SignatureProjects() {
           display: 'flex',
           alignItems: 'baseline',
           justifyContent: 'space-between',
+          position: 'relative',
+          zIndex: 2,
         }}
       >
         <div>

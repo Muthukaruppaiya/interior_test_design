@@ -115,18 +115,15 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
           width: '100%',
         }}
       >
-        <span
+        <img
+          src="/logo.png"
+          alt="Siriz Interiors"
           style={{
-            fontFamily: '"Cormorant Garamond", Georgia, serif',
-            fontSize: '24px',
-            fontWeight: 300,
-            letterSpacing: '0.24em',
-            textTransform: 'uppercase',
-            color: '#1B1916',
+            height: '32px',
+            width: 'auto',
+            objectFit: 'contain',
           }}
-        >
-          SIRIZ
-        </span>
+        />
 
         <button
           type="button"

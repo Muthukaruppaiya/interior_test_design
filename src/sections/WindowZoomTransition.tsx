@@ -21,6 +21,32 @@ export default function WindowZoomTransition({ isActive = false }: WindowZoomPro
         boxSizing: 'border-box',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.16,
+          filter: 'blur(16px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
+        }}
+      >
+        <img
+          src={media.doorway.image}
+          alt="Architectural space backdrop"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.78) 0%, rgba(248, 245, 239, 0.45) 50%, rgba(248, 245, 239, 0.88) 100%)',
+          }}
+        />
+      </div>
+
       {/* ── Background Subtle Architectural Grid Datum ── */}
       <div
         style={{

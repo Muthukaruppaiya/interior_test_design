@@ -1,17 +1,14 @@
-import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from 'react';
+import { useState, useRef, useEffect, type FormEvent } from 'react';
 import {
   Minus,
   Send,
   Mic,
-  Paperclip,
   RotateCcw,
   Volume2,
   VolumeX,
   Languages,
   Calendar,
   Sparkles,
-  ThumbsUp,
-  ThumbsDown,
   ArrowRight,
   Download,
   Share2,
@@ -86,7 +83,6 @@ export default function ChatWidget() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const t = i18n[language];
 
@@ -289,31 +285,7 @@ export default function ChatWidget() {
     handleSendMessage(input);
   };
 
-  /* ── 7. File Upload Simulation (Floor plan) ─────────────────────────────── */
-  const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const uploadNotice: ChatMessage = {
-        id: `upload-${Date.now()}`,
-        sender: 'user',
-        text: `📎 Attached Floor Plan: ${file.name}`,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      };
-      setMessages((prev) => [...prev, uploadNotice]);
 
-      setTimeout(() => {
-        const reply: ChatMessage = {
-          id: `bot-upload-${Date.now()}`,
-          sender: 'bot',
-          text: t.fileUploaded,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          language,
-          followUps: ['Book a review slot', 'Request indicative estimate', 'Talk to an architect'],
-        };
-        setMessages((prev) => [...prev, reply]);
-      }, 700);
-    }
-  };
 
   /* ── 8. Language Switcher ────────────────────────────────────────────────── */
   const toggleLanguage = () => {
@@ -368,10 +340,10 @@ export default function ChatWidget() {
     const confirmMsg: ChatMessage = {
       id: `lead-conf-${Date.now()}`,
       sender: 'bot',
-      text: `${t.leadSuccess} We look forward to meeting you, ${leadName}!`,
+      text: `${t.leadSuccess} Talk soon, ${leadName}!`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       language,
-      followUps: ['WhatsApp the designer now', 'Explore our 360 tour'],
+      followUps: ['WhatsApp Designer', 'Explore 360 Tour'],
     };
     setMessages((prev) => [...prev, confirmMsg]);
   };
@@ -465,13 +437,13 @@ export default function ChatWidget() {
       const botResponse: ChatMessage = {
         id: `slot-reply-${Date.now()}`,
         sender: 'bot',
-        text: `Excellent. We have tentatively held ${dayLabel} (${timePill}) for your consultation. Please provide your name and phone so our senior architect can connect:`,
+        text: `Reserved ${dayLabel} (${timePill}) for your consultation. Please share your details to confirm:`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         language,
         richType: 'lead_form',
       };
       setMessages((prev) => [...prev, botResponse]);
-    }, 600);
+    }, 500);
   };
 
   return (
@@ -545,36 +517,13 @@ export default function ChatWidget() {
           aria-label="Siriz Design Concierge Chatbot"
           className="concierge-window"
         >
-          {/* Mobile Top Dismiss Handle */}
-          <div
-            onClick={() => setIsOpen(false)}
-            style={{
-              width: '100%',
-              padding: '6px 0 2px',
-              display: 'flex',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              backgroundColor: 'rgba(255, 255, 255, 0.7)',
-            }}
-            title="Minimize concierge"
-          >
-            <div
-              style={{
-                width: '32px',
-                height: '4px',
-                borderRadius: '999px',
-                backgroundColor: 'rgba(169, 136, 82, 0.35)',
-              }}
-            />
-          </div>
-
           {/* Header Bar */}
           <div
             style={{
-              padding: '16px 20px',
-              borderBottom: '1px solid rgba(176, 141, 87, 0.2)',
-              backgroundColor: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(20px)',
+              padding: '14px 18px',
+              borderBottom: '1px solid rgba(169, 136, 82, 0.18)',
+              backgroundColor: 'rgba(255, 255, 255, 0.82)',
+              backdropFilter: 'blur(24px)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -582,59 +531,68 @@ export default function ChatWidget() {
               zIndex: 10,
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              {/* Mini Morphing Orb Avatar */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '11px', minWidth: 0 }}>
+              {/* Refined Luxury Studio Avatar */}
               <div
                 style={{
-                  width: '32px',
-                  height: '32px',
+                  width: '34px',
+                  height: '34px',
                   borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #B08D57 0%, #B9C2AE 100%)',
+                  background: 'linear-gradient(135deg, #A98852 0%, #D4AF37 55%, #8C6D3B 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 2px 8px rgba(176, 141, 87, 0.3)',
+                  boxShadow: '0 3px 10px rgba(169, 136, 82, 0.28)',
+                  flexShrink: 0,
                 }}
               >
-                <Sparkles size={14} color="#FFFFFF" />
+                <Sparkles size={15} color="#FFFFFF" />
               </div>
 
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span
-                    style={{
-                      fontFamily: '"Cormorant Garamond", serif',
-                      fontSize: '18px',
-                      fontWeight: 600,
-                      color: '#1C1A17',
-                    }}
-                  >
-                    {t.conciergeTitle}
-                  </span>
-                  <span
-                    style={{
-                      width: '7px',
-                      height: '7px',
-                      borderRadius: '50%',
-                      backgroundColor: '#22c55e',
-                      boxShadow: '0 0 6px rgba(34, 197, 94, 0.6)',
-                    }}
-                  />
+              <div style={{ minWidth: 0 }}>
+                <div
+                  style={{
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontSize: '17px',
+                    fontWeight: 600,
+                    color: '#1B1916',
+                    letterSpacing: '0.01em',
+                    lineHeight: 1.2,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  Siriz Concierge
                 </div>
                 <div
                   style={{
-                    fontSize: '10px',
-                    fontFamily: 'Inter, sans-serif',
-                    color: 'rgba(28, 26, 23, 0.55)',
+                    fontSize: '11px',
+                    fontFamily: '"Manrope", sans-serif',
+                    color: 'rgba(27, 25, 22, 0.58)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    marginTop: '2px',
+                    whiteSpace: 'nowrap',
                   }}
                 >
-                  {t.onlineStatus} · {t.hours}
+                  <span
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      backgroundColor: '#22c55e',
+                      boxShadow: '0 0 6px rgba(34, 197, 94, 0.6)',
+                      display: 'inline-block',
+                      flexShrink: 0,
+                    }}
+                  />
+                  <span>{t.onlineStatus}</span>
                 </div>
               </div>
             </div>
 
-            {/* Actions: Sound, Language, Clear, Minimize */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {/* Actions: Audio, Language Pill, Reset, Minimize */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
               <button
                 type="button"
                 onClick={() => setSoundEnabled(!soundEnabled)}
@@ -644,10 +602,13 @@ export default function ChatWidget() {
                   border: 'none',
                   cursor: 'pointer',
                   padding: '6px',
-                  color: soundEnabled ? '#B08D57' : 'rgba(28, 26, 23, 0.4)',
+                  color: soundEnabled ? '#A98852' : 'rgba(27, 25, 22, 0.38)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
               </button>
 
               <button
@@ -655,20 +616,22 @@ export default function ChatWidget() {
                 onClick={toggleLanguage}
                 title="Switch Language (English / தமிழ்)"
                 style={{
-                  background: 'none',
-                  border: 'none',
+                  background: 'rgba(169, 136, 82, 0.08)',
+                  border: '1px solid rgba(169, 136, 82, 0.28)',
+                  borderRadius: '999px',
                   cursor: 'pointer',
-                  padding: '6px',
-                  color: '#B08D57',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: '11px',
+                  padding: '4px 9px',
+                  color: '#8C6D3B',
+                  fontFamily: '"Manrope", sans-serif',
+                  fontSize: '10.5px',
                   fontWeight: 700,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '2px',
+                  gap: '4px',
+                  transition: 'all 0.2s ease',
                 }}
               >
-                <Languages size={15} />
+                <Languages size={13} />
                 <span>{language === 'en' ? 'தமிழ்' : 'EN'}</span>
               </button>
 
@@ -681,10 +644,13 @@ export default function ChatWidget() {
                   border: 'none',
                   cursor: 'pointer',
                   padding: '6px',
-                  color: 'rgba(28, 26, 23, 0.5)',
+                  color: 'rgba(27, 25, 22, 0.45)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                <RotateCcw size={15} />
+                <RotateCcw size={14} />
               </button>
 
               <button
@@ -696,7 +662,10 @@ export default function ChatWidget() {
                   border: 'none',
                   cursor: 'pointer',
                   padding: '6px',
-                  color: '#1C1A17',
+                  color: 'rgba(27, 25, 22, 0.65)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <Minus size={16} />
@@ -854,7 +823,7 @@ export default function ChatWidget() {
                               const moodboardReply: ChatMessage = {
                                 id: `mb-${Date.now()}`,
                                 sender: 'bot',
-                                text: 'Here is your bespoke spatial mood board based on your selections:',
+                                text: 'Here is your tailored mood board:',
                                 timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                                 language,
                                 richType: 'moodboard',
@@ -1210,45 +1179,7 @@ export default function ChatWidget() {
                   </div>
                 )}
 
-                {/* Feedback thumbs on bot messages */}
-                {msg.sender === 'bot' && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px', marginLeft: '4px' }}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMessages((prev) =>
-                          prev.map((m) => (m.id === msg.id ? { ...m, feedback: 'like' } : m))
-                        );
-                      }}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: '2px',
-                        color: msg.feedback === 'like' ? '#B08D57' : 'rgba(28, 26, 23, 0.3)',
-                      }}
-                    >
-                      <ThumbsUp size={11} />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMessages((prev) =>
-                          prev.map((m) => (m.id === msg.id ? { ...m, feedback: 'dislike' } : m))
-                        );
-                      }}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        padding: '2px',
-                        color: msg.feedback === 'dislike' ? '#B08D57' : 'rgba(28, 26, 23, 0.3)',
-                      }}
-                    >
-                      <ThumbsDown size={11} />
-                    </button>
-                  </div>
-                )}
+
 
                 {/* Suggested Follow-Up Chips */}
                 {msg.followUps && msg.followUps.length > 0 && (
@@ -1293,118 +1224,93 @@ export default function ChatWidget() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Action Dock Bar */}
+          {/* Quick Action Dock Bar (Clean, Minimal Single Row) */}
           <div
             style={{
-              padding: '6px 14px',
-              borderTop: '1px solid rgba(176, 141, 87, 0.15)',
-              backgroundColor: 'rgba(255, 255, 255, 0.6)',
+              padding: '8px 14px',
+              borderTop: '1px solid rgba(169, 136, 82, 0.14)',
+              backgroundColor: 'rgba(255, 255, 255, 0.75)',
+              backdropFilter: 'blur(16px)',
               display: 'flex',
               gap: '6px',
               overflowX: 'auto',
+              scrollbarWidth: 'none',
             }}
           >
             <button
               type="button"
-              onClick={() => handleSendMessage('Find my style quiz')}
+              onClick={() => handleSendMessage('45 days delivery')}
               className="chat-chip"
-              style={{ fontSize: '11px', padding: '5px 12px', flexShrink: 0 }}
+              style={{ fontSize: '11px', padding: '5px 11px', flexShrink: 0 }}
             >
-              ✦ {t.findMyStyle}
+              ⚡ 45 Days
             </button>
             <button
               type="button"
               onClick={() => handleSendMessage('Pricing & packages')}
               className="chat-chip"
-              style={{ fontSize: '11px', padding: '5px 12px', flexShrink: 0 }}
+              style={{ fontSize: '11px', padding: '5px 11px', flexShrink: 0 }}
             >
-              ₹ {t.pricingPackages}
+              💰 Pricing
             </button>
             <button
               type="button"
-              onClick={() => handleSendMessage('45 days delivery')}
+              onClick={() => handleSendMessage('Book Free Consultation')}
               className="chat-chip"
-              style={{ fontSize: '11px', padding: '5px 12px', flexShrink: 0 }}
+              style={{ fontSize: '11px', padding: '5px 11px', flexShrink: 0 }}
             >
-              ⚡ 45-Day Handover
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSendMessage('What materials do you use?')}
-              className="chat-chip"
-              style={{ fontSize: '11px', padding: '5px 12px', flexShrink: 0 }}
-            >
-              🪵 Noble Materials
-            </button>
-            <button
-              type="button"
-              onClick={() => handleSendMessage('Book a consultation')}
-              className="chat-chip"
-              style={{ fontSize: '11px', padding: '5px 12px', flexShrink: 0 }}
-            >
-              📅 {t.bookConsultation}
+              📐 Consultation
             </button>
             <button
               type="button"
               onClick={() => window.open(generateWhatsAppHandoffURL(convState), '_blank')}
               className="chat-chip"
-              style={{ fontSize: '11px', padding: '5px 12px', flexShrink: 0, backgroundColor: 'rgba(37, 211, 102, 0.15)', borderColor: 'rgba(37, 211, 102, 0.5)' }}
+              style={{
+                fontSize: '11px',
+                padding: '5px 11px',
+                flexShrink: 0,
+                backgroundColor: 'rgba(37, 211, 102, 0.1)',
+                borderColor: 'rgba(37, 211, 102, 0.4)',
+                color: '#0e7869',
+                fontWeight: 700,
+              }}
             >
-              💬 WhatsApp Architect
+              💬 WhatsApp
             </button>
           </div>
 
-          {/* Input Bar Form */}
+          {/* Minimal Input Bar Form */}
           <form
             onSubmit={handleFormSubmit}
             style={{
-              padding: '12px 16px',
-              borderTop: '1px solid rgba(176, 141, 87, 0.2)',
-              backgroundColor: 'rgba(255, 255, 255, 0.85)',
+              padding: '11px 14px',
+              borderTop: '1px solid rgba(169, 136, 82, 0.18)',
+              backgroundColor: 'rgba(255, 255, 255, 0.92)',
               backdropFilter: 'blur(20px)',
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
             }}
           >
-            {/* Floor plan upload mock button */}
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileSelect}
-              accept="image/*,.pdf"
-              style={{ display: 'none' }}
-            />
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              title="Attach floor plan or blueprint"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'rgba(28, 26, 23, 0.45)',
-                padding: '4px',
-              }}
-            >
-              <Paperclip size={18} />
-            </button>
-
             {/* Voice microphone button */}
             <button
               type="button"
               onClick={toggleVoiceInput}
               title={isListening ? 'Stop listening' : 'Voice input'}
               style={{
-                background: 'none',
+                background: isListening ? 'rgba(239, 68, 68, 0.12)' : 'none',
                 border: 'none',
+                borderRadius: '50%',
                 cursor: 'pointer',
-                color: isListening ? '#ef4444' : 'rgba(28, 26, 23, 0.45)',
-                padding: '4px',
-                animation: isListening ? 'pulseGlow 1.5s infinite' : 'none',
+                color: isListening ? '#ef4444' : 'rgba(27, 25, 22, 0.45)',
+                padding: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s',
               }}
             >
-              <Mic size={18} />
+              <Mic size={16} />
             </button>
 
             {/* Text Input */}
@@ -1419,9 +1325,10 @@ export default function ChatWidget() {
                 border: 'none',
                 outline: 'none',
                 background: 'none',
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '13px',
-                color: '#1C1A17',
+                fontFamily: '"Manrope", sans-serif',
+                fontSize: '12.5px',
+                color: '#1B1916',
+                padding: '2px 0',
               }}
             />
 
@@ -1431,20 +1338,24 @@ export default function ChatWidget() {
               disabled={!input.trim() || isTyping}
               aria-label="Send message"
               style={{
-                width: '34px',
-                height: '34px',
+                width: '32px',
+                height: '32px',
                 borderRadius: '50%',
-                backgroundColor: input.trim() && !isTyping ? '#B08D57' : 'rgba(176, 141, 87, 0.25)',
-                color: '#FFFFFF',
                 border: 'none',
+                background: input.trim() && !isTyping
+                  ? 'linear-gradient(135deg, #A98852 0%, #8C6D3B 100%)'
+                  : 'rgba(169, 136, 82, 0.2)',
+                color: '#FFFFFF',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: input.trim() && !isTyping ? 'pointer' : 'default',
-                transition: 'background-color 0.2s',
+                transition: 'all 0.2s ease',
+                boxShadow: input.trim() && !isTyping ? '0 3px 10px rgba(169, 136, 82, 0.35)' : 'none',
+                flexShrink: 0,
               }}
             >
-              <Send size={14} />
+              <Send size={13} style={{ transform: 'translateX(1px)' }} />
             </button>
           </form>
         </div>

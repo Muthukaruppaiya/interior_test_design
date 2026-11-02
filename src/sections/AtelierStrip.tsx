@@ -20,6 +20,32 @@ export default function AtelierStrip() {
         boxSizing: 'border-box',
       }}
     >
+      {/* ── Atmospheric Architectural Backdrop (Preserves Glassy Depth) ── */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          opacity: 0.16,
+          filter: 'blur(16px)',
+          transform: 'scale(1.06)',
+          pointerEvents: 'none',
+        }}
+      >
+        <img
+          src={media.atelier[0].image}
+          alt="Materials atelier backdrop"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(248, 245, 239, 0.78) 0%, rgba(248, 245, 239, 0.45) 50%, rgba(248, 245, 239, 0.88) 100%)',
+          }}
+        />
+      </div>
+
       <div
         style={{
           padding: '0 clamp(24px, 5vw, 64px)',
@@ -27,6 +53,8 @@ export default function AtelierStrip() {
           display: 'flex',
           alignItems: 'baseline',
           justifyContent: 'space-between',
+          position: 'relative',
+          zIndex: 2,
         }}
       >
         <div className="small-label" style={{ color: '#A98852' }}>
